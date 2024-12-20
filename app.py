@@ -135,36 +135,139 @@ st.text("Note: Before adding any value, Please consult and take a look at attrib
 
 c1, c2 = st.columns([1, 1])
 with c1:
-    st.subheader("Only input numerical values")
-    # Numerical Columns
-    input.loc[0, "MSSubClass"] = st.selectbox("MSSubClass: The building class",([None,20, 30, 40, 45, 50, 60, 70, 75, 80, 85, 90, 120, 150, 160, 180, 190]))
-    input.loc[0, "LotFrontage"] = st.number_input("LotFrontage: Linear feet of street connected to property")
-    input.loc[0, "LotArea"] = st.number_input("LotArea: Lot size in square feet")
-    input.loc[0, "OverallQual"] = st.number_input("OverallQual: Overall material and finish quality")
-    input.loc[0, "OverallCond"] = st.number_input("OverallCond: Overall condition rating")
-    input.loc[0, "YearBuilt"] = st.number_input("YearBuilt: Original construction date")
-    input.loc[0, "YearRemodAdd"] = st.number_input("YearRemodAdd: Remodel date")
-    input.loc[0, "MasVnrArea"] = st.number_input("MasVnrArea: Masonry veneer area in square feet")
-    input.loc[0, "BsmtFinSF1"] = st.number_input("BsmtFinSF1: Type 1 finished square feet")
-    input.loc[0, "BsmtUnfSF"] = st.number_input("BsmtUnfSF: Unfinished square feet of basement area")
-    input.loc[0, "TotalBsmtSF"] = st.number_input("TotalBsmtSF: Total square feet of basement area")
-    input.loc[0, "1stFlrSF"] = st.number_input("1stFlrSF: First Floor square feet")
-    input.loc[0, "2ndFlrSF"] = st.number_input("2ndFlrSF: Second floor square feet")
-    input.loc[0, "GrLivArea"] = st.number_input("GrLivArea: Above grade (ground) living area square feet")
-    input.loc[0, "BsmtFullBath"] = st.number_input("BsmtFullBath: Basement full bathrooms")
-    input.loc[0, "BsmtHalfBath"] = st.number_input("BsmtHalfBath: Basement half bathrooms")
-    input.loc[0, "FullBath"] = st.number_input("FullBath: Full bathrooms above grade")
-    input.loc[0, "HalfBath"] = st.number_input("HalfBath: Half baths above grade")
-    input.loc[0, "BedroomAbvGr"] = st.number_input("BedroomAbvGr: Number of bedrooms above basement level")
-    input.loc[0, "KitchenAbvGr"] = st.number_input("KitchenAbvGr: Number of kitchens")
-    input.loc[0, "TotRmsAbvGrd"] = st.number_input("TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)")
-    input.loc[0, "Fireplaces"] = st.number_input("Fireplaces: Number of fireplaces")
-    input.loc[0, "GarageYrBlt"] = st.number_input("GarageYrBlt: Year garage was built")
-    input.loc[0, "GarageCars"] = st.number_input("GarageCars: Size of garage in car capacity")
-    input.loc[0, "GarageArea"] = st.number_input("GarageArea: Size of garage in square feet")
-    input.loc[0, "WoodDeckSF"] = st.number_input("WoodDeckSF: Wood deck area in square feet")
-    input.loc[0, "OpenPorchSF"] = st.number_input("OpenPorchSF: Open porch area in square feet")
-
+       st.subheader("Only input numerical values")
+       # Numerical Columns
+       input.loc[0, "MSSubClass"] = st.selectbox("MSSubClass: The building class",([None,20, 30, 40, 45, 50, 60, 70, 75, 80, 85, 90, 120, 150, 160, 180, 190]))
+       input.loc[0, "LotFrontage"] = st.slider(
+       "LotFrontage: Linear feet of street connected to property", 
+       min_value=0, 
+       max_value=int(200.0 * 1.5)
+       )
+       input.loc[0, "LotArea"] = st.slider(
+       "LotArea: Lot size in square feet", 
+       min_value=0, 
+       max_value=int(56600 * 1.5)
+       )
+       input.loc[0, "OverallQual"] = st.slider(
+       "OverallQual: Overall material and finish quality", 
+       min_value=0, 
+       max_value=int(10)
+       )
+       input.loc[0, "OverallCond"] = st.slider(
+       "OverallCond: Overall condition rating", 
+       min_value=0, 
+       max_value=int(10)
+       )
+       input.loc[0, "YearBuilt"] = st.slider(
+       "YearBuilt: Original construction date", 
+       min_value=1800, 
+       max_value=int(2024)
+       )
+       input.loc[0, "YearRemodAdd"] = st.slider(
+       "YearRemodAdd: Remodel date", 
+       min_value=1800, 
+       max_value=int(2024)
+       )
+       input.loc[0, "MasVnrArea"] = st.slider(
+       "MasVnrArea: Masonry veneer area in square feet", 
+       min_value=0, 
+       max_value=int(1290.0 * 1.5)
+       )
+       input.loc[0, "BsmtFinSF1"] = st.slider(
+       "BsmtFinSF1: Type 1 finished square feet", 
+       min_value=0, 
+       max_value=int(4010.0 * 1.5)
+       )
+       input.loc[0, "BsmtUnfSF"] = st.slider(
+       "BsmtUnfSF: Unfinished square feet of basement area", 
+       min_value=0, 
+       max_value=int(2140.0 * 1.5)
+       )
+       input.loc[0, "TotalBsmtSF"] = st.slider(
+       "TotalBsmtSF: Total square feet of basement area", 
+       min_value=0, 
+       max_value=int(5095.0 * 1.5)
+       )
+       input.loc[0, "1stFlrSF"] = st.slider(
+       "1stFlrSF: First Floor square feet", 
+       min_value=0, 
+       max_value=int(5095 * 1.5)
+       )
+       input.loc[0, "2ndFlrSF"] = st.slider(
+       "2ndFlrSF: Second floor square feet", 
+       min_value=0, 
+       max_value=int(1862 * 1.5)
+       )
+       input.loc[0, "GrLivArea"] = st.slider(
+       "GrLivArea: Above grade (ground) living area square feet", 
+       min_value=0, 
+       max_value=int(5095 * 1.5)
+       )
+       input.loc[0, "BsmtFullBath"] = st.slider(
+       "BsmtFullBath: Basement full bathrooms", 
+       min_value=0, 
+       max_value=int(10)
+       )
+       input.loc[0, "BsmtHalfBath"] = st.slider(
+       "BsmtHalfBath: Basement half bathrooms", 
+       min_value=0, 
+       max_value=int(10)
+       )
+       input.loc[0, "FullBath"] = st.slider(
+       "FullBath: Full bathrooms above grade", 
+       min_value=0, 
+       max_value=int(10)
+       )
+       input.loc[0, "HalfBath"] = st.slider(
+       "HalfBath: Half baths above grade", 
+       min_value=0, 
+       max_value=int(10)
+       )
+       input.loc[0, "BedroomAbvGr"] = st.slider(
+       "BedroomAbvGr: Number of bedrooms above basement level", 
+       min_value=0, 
+       max_value=int(20)
+       )
+       input.loc[0, "KitchenAbvGr"] = st.slider(
+       "KitchenAbvGr: Number of kitchens", 
+       min_value=0, 
+       max_value=int(10)
+       )
+       input.loc[0, "TotRmsAbvGrd"] = st.slider(
+       "TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)", 
+       min_value=0, 
+       max_value=int(15 * 1.5)
+       )
+       input.loc[0, "Fireplaces"] = st.slider(
+       "Fireplaces: Number of fireplaces", 
+       min_value=0, 
+       max_value=int(15)
+       )
+       input.loc[0, "GarageYrBlt"] = st.slider(
+       "GarageYrBlt: Year garage was built", 
+       min_value=0, 
+       max_value=int(2024)
+       )
+       input.loc[0, "GarageCars"] = st.slider(
+       "GarageCars: Size of garage in car capacity", 
+       min_value=0, 
+       max_value=int(10)
+       )
+       input.loc[0, "GarageArea"] = st.slider(
+       "GarageArea: Size of garage in square feet", 
+       min_value=0, 
+       max_value=int(1488.0 * 1.5)
+       )
+       input.loc[0, "WoodDeckSF"] = st.slider(
+       "WoodDeckSF: Wood deck area in square feet", 
+       min_value=0, 
+       max_value=int(1424 * 1.5)
+       )
+       input.loc[0, "OpenPorchSF"] = st.slider(
+       "OpenPorchSF: Open porch area in square feet", 
+       min_value=0, 
+       max_value=int(742 * 1.5)
+       )
 
 with c2:   
        st.subheader("Only input text values according to the metadata below")
