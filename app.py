@@ -10,7 +10,7 @@ from scipy.stats import boxcox
 # Data Visualisation
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import plotly.express as px
 # Data Modeling
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.model_selection import cross_val_score, RandomizedSearchCV
@@ -133,7 +133,7 @@ st.text("")
 st.header("Prediction Terminal")
 st.text("Note: Before adding any value, Please consult and take a look at attribues description list for each attributes that you would input into our model. ")
 
-c1, c2 = st.columns([1, 1])
+c1, c15, c2 = st.columns([1,0.07, 1])
 with c1:
        st.subheader("Only input numerical values")
        # Numerical Columns
@@ -245,7 +245,7 @@ with c1:
        )
        input.loc[0, "GarageYrBlt"] = st.slider(
        "GarageYrBlt: Year garage was built", 
-       min_value=0, 
+       min_value=1800, 
        max_value=int(2024)
        )
        input.loc[0, "GarageCars"] = st.slider(
@@ -268,6 +268,8 @@ with c1:
        min_value=0, 
        max_value=int(742 * 1.5)
        )
+with c15:
+     st.text("  ")
 
 with c2:   
        st.subheader("Only input text values according to the metadata below")
@@ -367,5 +369,52 @@ st.markdown(
 )
 st.text("")
 
+#Result Comparison------------------------------------------------------
+st.header("Result Comparison")
+comparison = pd.read_csv("train.csv")
+newtrain = comparison[input.columns]
+newtrain["SalePrice"] = comparison["SalePrice"]
+newtrain["From"] = "Others"
+input["From"] = "Your Result"
+input["SalePrice"] = pred
+pdata = pd.concat([newtrain,input], axis= 0)
 
 
+req_num = ['MSSubClass', 'LotFrontage', 'LotArea', 'OverallQual', 'OverallCond', 'YearBuilt', 'YearRemodAdd', 'MasVnrArea', 'BsmtFinSF1', 'BsmtUnfSF', 'TotalBsmtSF', '1stFlrSF', '2ndFlrSF', 'GrLivArea', 'BsmtFullBath', 'BsmtHalfBath', 'FullBath', 'HalfBath', 'BedroomAbvGr', 'KitchenAbvGr', 'TotRmsAbvGrd', 'Fireplaces', 'GarageYrBlt', 'GarageCars', 'GarageArea', 'WoodDeckSF', 'OpenPorchSF']
+pdata["size"] = pdata["From"].apply(lambda x: 5 if x == "Your Result" else 2)
+
+# Display in Streamlit
+selected_columns = st.multiselect(
+    "Select columns to plot",
+    options=req_num,
+    default=req_num[:4]  # Default to first 3 columns if nothing is selected
+)
+
+# Create columns for layout in Streamlit
+laycol = st.columns(2)
+
+# Loop through selected columns and create a scatter plot
+for i, col in enumerate(selected_columns):
+    # Ensure the column exists in the DataFrame before plotting
+    if col in pdata.columns:
+        # Add a size column for demonstration (you can modify this logic as needed)
+        pdata["size"] = pdata["From"].apply(lambda x: 5 if x == "Your Result" else 2)
+
+        # Create scatter plot for the current column
+        fig = px.scatter(
+            pdata,
+            x=col,
+            y="SalePrice",
+            color="From",  # Color based on 'From' subcategory
+            title=f"Scatter Plot of SalePrice by {col}",
+            labels={col: col, "From": "Category"},
+            color_discrete_sequence=["#C41E3A", "#FFD700"],  # Custom color palette
+            size="size",  # Size based on 'From' subcategory
+            size_max=15  # Maximum size of dots
+        )
+
+        # Remove the white outline by setting line width to 0
+        fig.update_traces(marker=dict(line=dict(width=0)))
+
+        # Display the plot in the appropriate column
+        laycol[i % 2].plotly_chart(fig)  # This ensures the plots are distributed across 2 columns
