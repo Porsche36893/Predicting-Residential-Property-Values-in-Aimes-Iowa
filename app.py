@@ -11,7 +11,8 @@ import plotly.express as px
 # Data Modeling
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from xgboost import XGBRegressor
-
+import os
+import requests
 
 #Streaming
 import streamlit as st
@@ -332,9 +333,25 @@ st.markdown(
 st.text("")
 #Prediction Process------------------------------------------------------------------------------------------------------------------------------------------------
 
-#loading pipeline
-pipeline = joblib.load('pipelinexgb.pkl')
-st.write(pipeline)
+#LOADING PIPELINE
+
+# URL of the joblib file on GitHub
+model_url = "https://github.com/Porsche36893/Predicting-Residential-Property-Values-in-Aimes-Iowa/blob/DevBranch/pipelinexgb.pkl?raw=true"
+model_filename = "pipelinexgb.pkl"
+
+# Download the model file if it doesn't exist
+if not os.path.exists(model_filename):
+    with open(model_filename, "wb") as f:
+        f.write(requests.get(model_url).content)
+    st.success("Model downloaded successfully.")
+
+# Load the pipeline
+try:
+    pipeline = joblib.load(model_filename)
+    st.write("Pipeline loaded successfully!")
+except Exception as e:
+    st.error(f"Failed to load the pipeline: {e}")
+
 #prediction
 pred = pipeline.predict(input)
 
