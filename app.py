@@ -5,15 +5,11 @@ import joblib
 # Data Analysis
 import numpy as np
 import pandas as pd
-from scipy.stats import boxcox
 
 # Data Visualisation
-import matplotlib.pyplot as plt
-import seaborn as sns
 import plotly.express as px
 # Data Modeling
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
-from sklearn.model_selection import cross_val_score, RandomizedSearchCV
 from xgboost import XGBRegressor
 
 
@@ -345,7 +341,7 @@ pred = pipeline.predict(input)
 st.header("Prediction Result")
 st.subheader("Summary of your property attributes")
 st.dataframe(input)
-st.subheader("estimate is " + str(pred))
+st.subheader("estimate is " + str(int(pred)) + " $")
 
 
 st.text("")
