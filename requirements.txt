@@ -5,5 +5,4 @@ plotly
 scikit-learn
 xgboost
 streamlit
-os
 requests
