@@ -64,7 +64,7 @@ st.image("logo2.png", use_container_width= True)
 
 # Title text
 st.write("# Greetings Ames, Iowa citizens! ")
-
+st.write("dgfhksdgfhkgdskfsdjkfhkljsdfn")
 st.write("##### _Welcome to our House Price Prediction tool, designed specifically for the vibrant community of Ames, Iowa. Whether you're a seasoned homeowner looking to assess your property's value or a prospective buyer exploring the market, our accurate and user-friendly tool is here to assist you. Our model leverages advanced machine learning techniques and a comprehensive dataset of historical home sales in Ames to provide reliable price estimates. By inputting key property details, you can gain valuable insights into potential market values and make informed decisions._")
 st.text("")
 st.markdown(
