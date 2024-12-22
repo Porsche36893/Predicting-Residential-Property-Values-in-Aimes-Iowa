@@ -334,6 +334,7 @@ st.text("")
 
 #loading pipeline
 pipeline = joblib.load('pipelinexgb.pkl')
+st.write(pipeline)
 #prediction
 pred = pipeline.predict(input)
 
