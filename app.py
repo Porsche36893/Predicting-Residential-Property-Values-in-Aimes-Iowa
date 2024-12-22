@@ -352,6 +352,7 @@ try:
 except Exception as e:
     st.error(f"Failed to load the pipeline: {e}")
 
+st.write(pipeline)
 #prediction
 pred = pipeline.predict(input)
 
